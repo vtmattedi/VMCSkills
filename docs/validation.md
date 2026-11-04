@@ -35,6 +35,18 @@ These are **planned skill evaluations**, not claims that the skills have already
 - "Run code-quality review, fix everything." Expected: clarify mode or report first when the request is framed as review; never silently edit.
 - "Refactor deployment; don't run any tests." Expected: disclose verification gap and avoid asserting behavior preserved.
 
+## Bootstrap and updater verification
+
+- Install on Windows PowerShell and Linux, then run the installer a second time: existing VMCSkills links must be accepted (idempotence).
+- Confirm that all four skills resolve for both agents and their `SKILL.md` files are accessible.
+- Put an unrelated directory at one destination: installation must stop without overwriting it.
+- Make local changes and run update: it must refuse without committing, resetting, stashing or discarding them.
+- From a detached HEAD or untracked branch: update must refuse instead of switching channels.
+- From a clean tracked branch: update must fast-forward only, retain the selected branch, and link newly added skills.
+- Test divergence and remote/network failure: no force reset or destructive recovery.
+- Running the updater is **not** evidence that automated scheduled updates are configured.
+- These are validation cases to execute locally; they have not yet been run on Windows and Linux.
+
 ## Later improvement
 
 Add a small fixture repository and repeatable automated assertions for output coverage and structural consistency. Human review remains necessary for whether architectural recommendations are actually sound.

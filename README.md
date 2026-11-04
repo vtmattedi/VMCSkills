@@ -6,6 +6,8 @@ Reusable, adaptable skills for coding agents. The initial suite helps organize e
 
 | Skill | Purpose |
 | --- | --- |
+| [clear-writing](.agents/skills/clear-writing/SKILL.md) | Review, draft, and rewrite natural, accurate text without unsupported hype, filler, or loss of author voice |
+| [adversarial-review](.agents/skills/adversarial-review/SKILL.md) | Stress-test decisions, assumptions, and alternatives with evidence-calibrated verdicts |
 | [code-quality](.agents/skills/code-quality/SKILL.md) | Review source files for ownership, cohesion, maintainability, and necessary comments; plan and verify refactors |
 | [frontend-structure](.agents/skills/frontend-structure/SKILL.md) | Select and evolve frontend ownership, component, state, and dependency boundaries |
 | [backend-structure](.agents/skills/backend-structure/SKILL.md) | Select and evolve backend module, persistence, orchestration, and transport boundaries |
@@ -29,6 +31,8 @@ Reusable, adaptable skills for coding agents. The initial suite helps organize e
 Each skill is self-contained under `.agents/skills/<name>/`, with a short `SKILL.md` entrypoint and supporting references. Install or copy the desired directory into the agent's supported skills location, or read the skill instructions directly. In a repository, local `AGENTS.md`, ADRs, and contracts govern project-specific decisions; surface conflicts instead of silently overriding them.
 
 Examples of requests:
+- "Use clear-writing to rewrite this README, keeping all technical claims and its original voice."
+- "Use adversarial-review to challenge the proposed authentication flow; identify what would change your recommendation."
 - "Use code-quality to audit this repository; account for every source file."
 - "Use frontend-structure to propose a scalable reorganization; report first."
 - "Use backend-structure to restructure the deployment subsystem in small verified steps."
@@ -36,7 +40,7 @@ Examples of requests:
 
 ## Review depths and risk decisions
 
-Two independent decisions control how the engineering skills run:
+Two independent decisions control how the **engineering structure and code-quality skills** run. The writing and adversarial-review skills have their own modes and permission boundaries:
 
 | Dimension | Options | Meaning |
 | --- | --- | --- |

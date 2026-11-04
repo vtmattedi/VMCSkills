@@ -92,7 +92,7 @@ The updater pulls **only the currently checked-out branch's upstream**, using fa
 
 If installation reports an existing directory conflict, inspect it and resolve the naming conflict manually. Do not delete a directory merely to make the installation succeed.
 
-See [Codex's skills documentation](https://learn.chatgpt.com/docs/build-skills) and [Claude Code's skills documentation](https://code.claude.com/docs/en/skills) for their current discovery conventions.
+See [OpenAI's skill-format guidance](https://developers.openai.com/plugins/build/skills) and [Claude Code's skills documentation](https://code.claude.com/docs/en/skills) for their current discovery conventions.
 
 ## Validation
 

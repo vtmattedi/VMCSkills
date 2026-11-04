@@ -9,4 +9,6 @@ This repository publishes reusable instructions, not a single application archit
 - Do not turn examples from tripleA-work, Stackport, or MW Identity into universal requirements.
 - Review-mode invocations never edit the target repository; an implementation must include behavior checks.
 - Keep prose concise and avoid contradictory MUST rules or unstated prerequisites.
+- Survey mode is allowed to sample and must disclose unreviewed scope; complete scoped audits must actually inspect all in-scope files and answer Q1–Q4, even when processed in batches.
+- Recommend a restructure only when anticipated benefits justify implementation effort, regression risk, and available verification. Explicitly protect healthy boundaries and security-critical invariants.
 - When modifying a skill, review `docs/validation.md` and consider the counterexamples.

@@ -18,6 +18,14 @@ For reviews, passes, architecture assessments and plans, **report without modify
 4. Propose a preset or hybrid, explaining why it fits and what it deliberately omits.
 5. Ask only if a material unresolved product or architecture choice changes the plan. Otherwise use an explicit assumption and proceed with the requested report.
 
+## Review depth and restructure gate
+
+- **Architecture survey** (default for broad exploratory requests): map frontends, routes, features, dependencies and risks from representative files. Disclose inspected samples and unreviewed scope; do not assert a complete file-by-file review.
+- **Complete scoped audit** (when asked for all files or thorough review of a specified frontend scope): inventory and inspect every source file in that scope; answer the four file-quality questions for each, and provide a coverage matrix. Batch large audits and mark unfinished work explicitly.
+- Review/plan remains read-only at either depth; only explicit implementation permission allows edits.
+- Every proposed move/split/merge needs a **KEEP / RESTRUCTURE / DEFER** decision based on expected benefit, effort, regression/security risk, reversibility and verification. Preserve good boundaries even under restructure-first defaults.
+- Treat secret display, authentication step-up, pending mutation replay, local/session storage, and user-facing recovery as high-consequence behavioral contracts. Propose tests before changing them.
+
 ## Preset choices
 
 - **Minimal:** small SPA, embedded UI, utility. Pages, components, and focused API/helpers; no feature-layer ceremony.
@@ -44,6 +52,6 @@ For every affected source file: (1) does each significant piece belong here? (2)
 
 ## Output and execution
 
-Produce a current ownership map; selected/hybrid preset and alternatives; problems with path/behavior evidence; target tree and import boundaries; migration sequence with explicit file moves; invariants and tests to preserve; risks and deferrals. In full-scope audits identify unreviewed files.
+Produce a current ownership map; declared review depth and exact inspected scope; selected/hybrid preset and alternatives; evidence-backed findings and explicit healthy boundaries to KEEP. For each proposed change include effort, benefit, risk, reversibility and verification coverage; provide a target tree/import boundaries and migration sequence only where justified. Surveys report sample coverage and unreviewed scope; complete audits include per-file Q1–Q4 and an honest completion status.
 
 During authorized implementation, migrate in cohesive slices, keep public contracts and behavior stable unless changes were requested, update tests and architectural documentation, run project checks, and repeat the four file questions on changes. Never claim a verification step ran if it did not.

@@ -21,6 +21,8 @@ Reusable, adaptable skills for coding agents. The initial suite helps organize e
 - Keep decisions adaptive to language, application type, scale, and existing accepted architecture.
 - Report facts separately from inference; disclose uninspected files and unexecuted verification.
 - A review or audit is read-only; implement only when explicitly requested or authorized.
+- Choose a **survey** for broad discovery or a **complete scoped audit** for file-by-file coverage; never claim a sample covers the whole repository.
+- Explain **benefit, effort, regression risk, and verification** for every proposed restructure. A justified `KEEP` is a successful outcome.
 
 ## Using the skills
 
@@ -31,6 +33,31 @@ Examples of requests:
 - "Use frontend-structure to propose a scalable reorganization; report first."
 - "Use backend-structure to restructure the deployment subsystem in small verified steps."
 
+
+## Review depths and risk decisions
+
+Two independent decisions control how the engineering skills run:
+
+| Dimension | Options | Meaning |
+| --- | --- | --- |
+| **Depth** | Architecture survey | Map subsystems, sample representative files, identify hotspots, and disclose what was not read. Useful as a first pass over a large repository. |
+| **Depth** | Complete scoped audit | Inventory and read **every source file in the specified scope**; answer code-quality Q1–Q4 per file, with a coverage matrix. Batch the work if needed, and mark incomplete coverage honestly. |
+| **Action** | Review / plan / improve | A review or plan is read-only; `improve` requires explicit authorization to edit. |
+
+Default to **architecture survey for broad exploratory requests**. Select **complete scoped audit** when asked to review every file, perform a full audit, or audit a defined module comprehensively. The user can override either depth. A survey is never a completed file-level audit.
+
+All structural recommendations must justify their **expected scalability/maintainability benefit**, **implementation effort**, **regression/security risk**, **reversibility**, and **test coverage**. High-risk changes without suitable regression checks should be flagged for preparation rather than automatically implemented. Existing well-owned code should be explicitly preserved, even with `optimization=scale` and `change strategy=restructure`.
+
+Example focused pilot:
+
+```text
+$code-quality Complete scoped audit of mw-web-admin/src/preferences and
+mw-web-admin/src/pages/Control. Answer Q1–Q4 for every in-scope file,
+identify KEEP decisions, and rank restructuring opportunities by benefit,
+cost, and regression risk. Review only; do not edit.
+```
+
+For an initial survey of a large monorepo, request `architecture survey` explicitly and follow up with a scoped audit of the most promising subsystem.
 
 ## Install for Codex and Claude Code
 

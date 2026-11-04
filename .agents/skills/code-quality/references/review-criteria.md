@@ -25,6 +25,29 @@ Use this decision order:
 Good: `// Lock the project before checking blockers; concurrent order creation must not bypass archiving.`
 Bad: `// Get the project` before `getProject(id)`.
 
+## Restructure decision: value, cost, risk
+
+Do not equate `optimization=scale` or `change strategy=restructure` with an obligation to change every file. For each material restructuring proposal, record:
+
+| Dimension | Required question |
+| --- | --- |
+| Benefit | Which independent changes become easier, which duplicated rules or coupling disappear, and how is ownership clarified? |
+| Effort | What code, tests, imports, docs and migrations must change? Is the cost small, medium, or high, and why? |
+| Risk | What correctness, security, data, protocol or user-facing behavior could regress? Which invariants must remain intact? |
+| Reversibility | Can the change be isolated, rolled back, or deployed in stages? |
+| Verification | Which current tests or added regression checks prove invariants? What remains untested? |
+| Decision | **KEEP**, **RESTRUCTURE**, or **DEFER**, including a counterargument and evidence/confidence. |
+
+Do not invent numerical ROI scores or pretend rough estimates are measured. **Low-value/high-risk restructuring should be KEEP or DEFER**, not required by a structural-change default. Security-critical changes need stronger evidence and regression coverage before implementation. Recognize that a focused long Go service or router can be good design.
+
+Concrete reference contrasts to test this judgment:
+- Moving a large translation dictionary out of a React context: likely low regression risk and clear ownership benefit, after checking imports and translation lookup semantics.
+- Extracting a generic resource page's credential creation and post-step-up replay: potentially high benefit but **higher security/replay risk**; preserve one-time secrets, idempotence, pending-state cleanup, and behavior under React StrictMode.
+- Splitting a Go HTTP handler file by responsibility *within the same package*: possibly useful without introducing new public APIs or unnecessary interfaces.
+- Rebuilding existing OIDC token exchange into new abstractions merely to meet a preset: likely counterproductive when boundaries and tests are already sound.
+
+Document why the current implementation may be worth preserving, even when recommending a change.
+
 ## Findings and severity
 
 - **Critical:** demonstrable exploitation, data loss, or severe correctness failure.

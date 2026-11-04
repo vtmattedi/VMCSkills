@@ -13,6 +13,14 @@ Optimize for scalable, understandable modules and explicit invariants. Default t
 
 A review, pass, audit or planning request is **read-only**. Implement only with clear authorization. Inspect project instructions and accepted ADRs, code, tests, data model, protocol/API contracts, build/deployment environment, failure paths, and external dependencies. Identify language/runtime conventions, system purpose, team/maintenance scale, and growth constraints. Select the simplest preset or hybrid that covers demonstrated responsibilities. Ask only for a choice that would materially change structure.
 
+## Review depth and restructure gate
+
+- **Architecture survey** (default for broad exploration): map packages, services, dependency/failure boundaries and significant tests through representative implementations. Disclose read paths and unreviewed areas. Do not claim a file-by-file audit.
+- **Complete scoped audit** (requested exhaustive review or defined comprehensive scope): inspect every source file in scope, answer the four quality questions for each, and report coverage; process batches as needed and mark incomplete status honestly.
+- Both depths are read-only by default. Changes require explicit implementation authorization.
+- Every structural proposal must compare **maintainability/scalability benefit**, effort, correctness/security/data-integrity risk, reversibility, and tests that can establish behavior preservation. Return **KEEP / RESTRUCTURE / DEFER**; preserving existing good Go package boundaries is a valid success.
+- Treat identity, OAuth/OIDC, credentials, signing, delegated tokens, auth/session, transactions, recovery, and cryptographic state as high-consequence: demand stronger evidence and regression checks before edits. Refactoring a long handler *within the same package* may be safer than introducing a generic service layer.
+
 ## Starting presets
 
 - **Minimal service:** small APIs and utilities with handlers and focused helpers.
@@ -36,6 +44,6 @@ For every affected source file answer the four quality questions: correct placem
 
 ## Output and implementation
 
-Report existing subsystem map and observed problems with paths; selected/hybrid preset and rejected alternatives; target modules/dependency direction; precise moves or extractions; staged migration preserving public APIs, schemas, data and protocols; test strategy and known constraints. Label unreviewed code.
+Report declared review depth, inspected/unreviewed coverage, existing subsystem map and concrete problems with paths; selected/hybrid preset and alternatives; justified KEEP decisions. Every material change includes benefit, effort, risk, reversibility and verification, plus target modules, precise moves and migration stages only if warranted. Complete audits include Q1–Q4 per in-scope file and honest completion status. Preserve public APIs, schemas, data and protocols.
 
 During authorized implementation, make bounded changes and keep current behavior stable unless requested otherwise; add regression coverage for side effects and concurrency; run relevant checks; re-review changed files against the four quality questions and state any unverified behavior.

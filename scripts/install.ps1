@@ -25,7 +25,11 @@ foreach ($destination in $destinations) {
     if ($null -eq $existing) { continue }
     $isLink = ($existing.Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0
     $resolved = if ($isLink) {
-      try { (Resolve-Path -LiteralPath $link -ErrorAction Stop).Path.TrimEnd('\') } catch { '' }
+      # PowerShell Resolve-Path may keep the junction path; inspect its actual target.
+      $target = [string]$existing.Target
+      if ([IO.Path]::IsPathRooted($target)) {
+        [IO.Path]::GetFullPath($target).TrimEnd('\')
+      } else { '' }
     } else { '' }
     if (-not $isLink -or $resolved -ine $skill.FullName.TrimEnd('\')) {
       throw "Conflict: $link exists and is not a VMCSkills link to $($skill.FullName)"
